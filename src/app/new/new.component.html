@@ -1,0 +1,44 @@
+
+<div>
+  <label>Search</label>
+  <input type="text" class="form-control" type="search" [(ngModel)]="term">
+</div>
+<div class="modal-body">
+         <table class="table table-bordered" style="width:100%" >
+             <tr>
+              <th>TITLE</th>
+              <th>URL</th>
+              <th>CREATED_AT</th>
+              <th>AUTHOR</th>
+             </tr>
+             <tr *ngFor="let d of set | pipe: term" (click)="click(d)"   [ngClass] = "{'highlight' : d.author == selectedName}"  data-toggle="modal" data-target="#myModal">
+              <td>{{d.title}}</td>
+              <td>{{d.url}}</td>
+              <td>{{d.created_at | date:' M/d/yy, h:mm a,EEEE'}}</td>
+              <td>{{d.author}}</td>
+             </tr>
+            </table>
+            <h2 class="text-danger" *ngIf="(set |pipe:term)?.length==0">NO RESULT</h2>
+        </div>
+
+        <div class="modal" id="myModal">
+            <div class="modal-dialog modal-xl">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title"> Data</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                <!-- <b>Title:</b> {{title|json}}<br>
+                <b> Url :</b>{{url|json}}<br>
+                <b>Created_at:</b>  {{created_at|json}}<br>
+                 <b>Author:</b> {{author|json}}} -->
+                 <pre>{{dis|json}}</pre>
+                
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+          </div>
+            </div>
+        
